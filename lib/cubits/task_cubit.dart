@@ -140,7 +140,12 @@ class TaskCubit extends Cubit<List<Task>> {
   }
 
   void selectTask(Task task) {
-    selectedTask = task;
+
+    if (selectedTask == task) {
+      selectedTask = null; // unselect the already selected task
+    } else {
+      selectedTask = task; // select the task if unselected
+    }
     emit(List.from(state)); // Re-emit the current state to trigger updates
   }
 }

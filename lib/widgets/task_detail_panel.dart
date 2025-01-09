@@ -43,6 +43,17 @@ class TaskDetailPanel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Title'),
+                  IconButton(
+                    onPressed: () {
+                      context.read<TaskCubit>().selectTask(selectedTask);
+                    }, 
+                    icon: Icon(Icons.close))
+                ],
+              ),
               Text(
                 selectedTask.name,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
