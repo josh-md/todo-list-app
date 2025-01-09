@@ -26,6 +26,7 @@ class _StatusNavigationPanelState extends State<StatusNavigationPanel> {
         });
 
         final selectedStatus = statuses[_selectedIndex];
+        context.read<TaskCubit>().updateStatus(selectedStatus); //Update selected status
         context.read<TaskCubit>().filterTasks(selectedStatus);
       },
       leading: FloatingActionButton(

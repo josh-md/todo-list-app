@@ -3,7 +3,8 @@ import '../models/task_model.dart';
 
 class TaskCubit extends Cubit<List<Task>> {
   final List<Task> allTasks; // Master list of all tasks
-  Task? selectedTask;
+  TaskStatus? selectedStatus; // track current selected status
+  Task? selectedTask; // track current selected status
 
   TaskCubit()
       : allTasks = [
@@ -93,6 +94,11 @@ class TaskCubit extends Cubit<List<Task>> {
           ),
         ]);
 
+  void updateStatus(TaskStatus? status) {
+    selectedStatus = status;
+    emit(List.from(state));
+  }
+  
   void updateTask(Task updatedTask) {
     // Update task in the master list
     final index = allTasks.indexWhere((task) => task.id == updatedTask.id);
@@ -140,7 +146,6 @@ class TaskCubit extends Cubit<List<Task>> {
   }
 
   void selectTask(Task task) {
-
     if (selectedTask == task) {
       selectedTask = null; // unselect the already selected task
     } else {

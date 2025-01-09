@@ -9,13 +9,18 @@ class TaskListPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentStatus = TaskStatus.todo;
+    //final currentStatus = TaskStatus.todo;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          currentStatus.name.toUpperCase(),
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        title: BlocBuilder<TaskCubit, List<Task>>(
+          builder: (context, tasks) {
+            final selectedStatus = context.read<TaskCubit>().selectedStatus;
+            return Text(
+              selectedStatus == null ? 'All Tasks' : selectedStatus.name.toUpperCase(),
+              style: const TextStyle(fontWeight: FontWeight.bold),
+              );
+          }
         ),
         actions: [
           IconButton(
